@@ -18,7 +18,7 @@ const config = {
   
 	plugins: [
 		skeleton({
-			themes: { preset: [ "seafoam" ] }
+			themes: { preset: [ { name: "seafoam", enhancements: true } ] }
 		})
 	],
 } satisfies Config;
