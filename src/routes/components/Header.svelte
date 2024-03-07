@@ -3,7 +3,7 @@
 	import Avatar from "$lib/components/icons/Avatar.svelte";
   	import { popup, type PopupSettings} from "@skeletonlabs/skeleton";
 	import ProfilePopup from "./ProfilePopup.svelte";
-	// import { page } from "$app/stores";
+	import { page } from "$app/stores";
 
 	const popupProfile: PopupSettings = {
 		event: "click",
@@ -11,10 +11,7 @@
 		placement: "bottom-end",
 	};
 
-	// $: username = $page.data.user?.username;
-	// $: userLoggedIn = $page.data?.user;
-	$: username = "marika12"
-	$: userLoggedIn = true;
+	let username = $page.data.user?.username;
 </script>
 
 <header class="bg-surface-100">
@@ -32,7 +29,7 @@
 			<h1 class="h3 md:h2">A Szomszéd Zöldséges</h1>
 		</a>
 		<div class="ml-auto flex items-center space-x-3 md:space-x-4 font-bold">
-			{#if userLoggedIn}
+			{#if $page.data.user}
 				<button
 					type="button"
 					class="flex items-center rounded-full hover:bg-primary-600 pl-2 py-0.5"
