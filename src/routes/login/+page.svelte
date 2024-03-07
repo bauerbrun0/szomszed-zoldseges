@@ -1,5 +1,5 @@
 <script lang="ts">
-	// export let form;
+	export let form;
 
 </script>
 
@@ -21,21 +21,21 @@
 					Felhasználónév
 				</label>
 				<input
-					type="email"
-					id="email"
-					name="email"
-					class="input w-full"
+					type="text"
+					id="username"
+					name="username"
+					class={`input w-full ${form?.errors?.username ? "input-error" : ""}`}
 					autocapitalize="off"
 					spellcheck="false"
 					autocomplete="off"
+					value={form?.fields?.username || ""}
 					required
-					value={/* form?.fields?.username || */ ""}
 				/>
-				<!-- {#if form?.errors?.username}
+				{#if form?.errors?.username}
 					<p class="block text-red-500">
 						{form.errors.username}	
 					</p>
-				{/if} -->
+				{/if}
 			</div>
 			<div class="space-y-1">			
 				<label for="password" class="label">
@@ -45,17 +45,17 @@
 					type="password"
 					id="password"
 					name="password"
-					class="input w-full"
+					class={`input w-full ${form?.errors?.password ? "input-error" : ""}`}
 					autocapitalize="off"
 					spellcheck="false"
 					autocomplete="off"
 					required
 				/>
-				<!-- {#if form?.errors?.password}
+				{#if form?.errors?.password}
 					<p class="block text-red-500">	
 						{form.errors.password}	
 					</p>
-				{/if} -->
+				{/if}
 			</div>
 			
 			<div class="pt-4">
