@@ -10,7 +10,7 @@
 	</div>
 	<hr class="my-2 md:my-4 !border-primary-400"/>
 	<div>
-		<form class="w-full" action="/signout" method="POST">
+		<form class="w-full" action="/logout" method="POST">
 			<button 
 				class="block w-full text-left my-1 px-2 py-1 rounded-md hover:bg-primary-400"
 				type="submit"
