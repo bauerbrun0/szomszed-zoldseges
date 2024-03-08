@@ -14,7 +14,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 		const sessionCookie = lucia.createSessionCookie(session.id);
 		event.cookies.set(sessionCookie.name, sessionCookie.value, {
 			path: ".",
-			...sessionCookie.attributes
+			...sessionCookie.attributes,
+			httpOnly: false
 		});
 	}
 
@@ -22,7 +23,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 		const sessionCookie = lucia.createBlankSessionCookie();
 		event.cookies.set(sessionCookie.name, sessionCookie.value, {
 			path: ".",
-			...sessionCookie.attributes
+			...sessionCookie.attributes,
+			httpOnly: false
 		});
 	}
 

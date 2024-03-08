@@ -5,3 +5,11 @@ export type Product = {
 	price: string,
 	origin: string,
 }
+
+export type Supplier = {
+	name: string,
+	person: string,
+	email: string,
+	phone: string,
+	address: string,
+}

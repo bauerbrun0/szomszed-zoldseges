@@ -43,7 +43,8 @@ export const actions: Actions = {
 		const sessionCookie = lucia.createSessionCookie(session.id);
 		cookies.set(sessionCookie.name, sessionCookie.value, {
 			path: ".",
-			...sessionCookie.attributes
+			...sessionCookie.attributes,
+			httpOnly: false
 		});
 
 		return redirect(302, "/");

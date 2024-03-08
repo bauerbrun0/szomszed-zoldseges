@@ -17,6 +17,16 @@ CREATE TABLE `sessions` (
 	FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
+CREATE TABLE `suppliers` (
+	`id` text PRIMARY KEY NOT NULL,
+	`name` text NOT NULL,
+	`person` text NOT NULL,
+	`email` text NOT NULL,
+	`address` text NOT NULL,
+	`phone` text NOT NULL,
+	`secret` integer NOT NULL
+);
+--> statement-breakpoint
 CREATE TABLE `users` (
 	`id` text PRIMARY KEY NOT NULL,
 	`username` text NOT NULL,
