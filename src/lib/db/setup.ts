@@ -9,7 +9,7 @@ const jozsiHashedPassword = await new Argon2id().hash("Password123");
 
 await db.insert(users).values({
 	id: "1",
-	username: "marika12",
+	username: "queen_marika12",
 	hashedPassword: marikasHashedassword,
 	isAdmin: false
 });
@@ -23,7 +23,7 @@ await db.insert(users).values({
 
 await db.insert(nonAdminUsers).values({
 	id: "1",
-	username: "marika12",
+	username: "queen_marika12",
 	hashedPassword: marikasHashedassword
 });
 
