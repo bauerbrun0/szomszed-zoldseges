@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "vite dev",
+    "dev": "vite dev --host",
     "build": "vite build",
     "preview": "vite preview",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
@@ -12,7 +12,8 @@
     "db:push": "drizzle-kit push:sqlite",
     "db:setup": "pnpm tsx src/lib/db/setup.ts",
     "db:studio": "drizzle-kit studio --verbose",
-    "db:dev:dump": "bash -c 'read -p  \"DELETING DATABASE AND MIGRATIONS. DO NOT USE THIS IN PRODUCTION! Do you wish to continue? (y/n): \" x; [ \"$x\" = \"y\" ] && rm -rf ./drizzle && mkdir -p ./drizzle/.db && echo 'Done''"
+    "db:dev:dump": "bash -c 'read -p  \"DELETING DATABASE AND MIGRATIONS. DO NOT USE THIS IN PRODUCTION! Do you wish to continue? (y/n): \" x; [ \"$x\" = \"y\" ] && rm -rf ./drizzle && mkdir -p ./drizzle/.db && echo 'Done''",
+	"db:dev:reset": "pnpm run db:dev:dump && pnpm run db:migrate && pnpm run db:push && pnpm run db:setup"
   },
   "devDependencies": {
     "@skeletonlabs/skeleton": "^2.9.0",
