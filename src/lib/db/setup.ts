@@ -1,8 +1,10 @@
 import { Argon2id } from "oslo/password";
+import { sha256 } from "oslo/crypto";
+import { encodeHex } from "oslo/encoding";
 import db from "./";
 import { users, nonAdminUsers, adminUsers } from "./schema";
 
-const marikasHashedassword = await new Argon2id().hash("Password123");
+const marikasHashedassword = encodeHex(await sha256(new TextEncoder().encode("Password123")));
 const jozsiHashedPassword = await new Argon2id().hash("Password123");
 
 await db.insert(users).values({

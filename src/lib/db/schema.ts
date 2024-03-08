@@ -1,4 +1,3 @@
-import { sql } from "drizzle-orm";
 import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
 
 // for lucia we have to use the same table for both admin and non-admin users
