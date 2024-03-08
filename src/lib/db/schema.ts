@@ -30,6 +30,16 @@ export const sessions = sqliteTable("sessions", {
 	expiresAt: integer("expires_at").notNull()
 });
 
+export const suppliers = sqliteTable("suppliers", {
+	id: text("id").notNull().primaryKey(),
+	name: text("name").notNull(),
+	person: text("person").notNull(),
+	email: text("email").notNull(),
+	address: text("address").notNull(),
+	phone: text("phone").notNull(),
+	secret: integer("secret", { mode: "boolean" }).notNull(),
+});
+
 export type NewUser = typeof users.$inferInsert;
 export type User = typeof users.$inferSelect;
 export type NewNonAdminUser = typeof nonAdminUsers.$inferInsert;
@@ -38,3 +48,5 @@ export type NewAdminUser = typeof adminUsers.$inferInsert;
 export type AdminUser = typeof adminUsers.$inferSelect;
 export type NewSessionData = typeof sessions.$inferInsert;
 export type SessionData = typeof sessions.$inferSelect;
+export type NewSupplier = typeof suppliers.$inferInsert;
+export type Supplier = typeof suppliers.$inferSelect;
