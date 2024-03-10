@@ -10,14 +10,16 @@ export const lucia = new Lucia(luciaAdapter, {
 		}
 	},
 	getUserAttributes: (attributes) => ({
+		id: attributes.id,
 		username: attributes.username,
-		isAdmin: attributes.isAdmin
+		isAdmin: attributes.isAdmin,
+		image: attributes.image,
 	})
 });
 
 declare module "lucia" {
 	interface Register {
 		Lucia: typeof lucia;
-		DatabaseUserAttributes: Omit<User, "id">;
+		DatabaseUserAttributes: User;
 	}
 }
