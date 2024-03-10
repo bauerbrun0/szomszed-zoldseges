@@ -1,13 +1,24 @@
 CREATE TABLE `admin_users` (
 	`id` text PRIMARY KEY NOT NULL,
 	`username` text NOT NULL,
-	`hashed_password` text NOT NULL
+	`hashed_password` text NOT NULL,
+	`image` text NOT NULL
+);
+--> statement-breakpoint
+CREATE TABLE `customer_needs` (
+	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	`user_id` text NOT NULL,
+	`created_at` integer NOT NULL,
+	`content` text NOT NULL,
+	`session_id` text,
+	FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
 CREATE TABLE `non_admin_users` (
 	`id` text PRIMARY KEY NOT NULL,
 	`username` text NOT NULL,
-	`hashed_password` text NOT NULL
+	`hashed_password` text NOT NULL,
+	`image` text NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE `sessions` (
@@ -31,7 +42,8 @@ CREATE TABLE `users` (
 	`id` text PRIMARY KEY NOT NULL,
 	`username` text NOT NULL,
 	`hashed_password` text NOT NULL,
-	`is_admin` integer DEFAULT false NOT NULL
+	`is_admin` integer DEFAULT false NOT NULL,
+	`image` text NOT NULL
 );
 --> statement-breakpoint
 CREATE UNIQUE INDEX `admin_users_username_unique` ON `admin_users` (`username`);--> statement-breakpoint

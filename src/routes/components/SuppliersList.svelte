@@ -2,11 +2,12 @@
   	import type { Supplier } from "$lib/types";
 
 	export let suppliers: Supplier[] = [];
-	export let emptyMessage: string = "Nincs megjeleníthető elem.";
 </script>
 
-{#if suppliers.length === 0}
-	<p>{emptyMessage}</p>	
+{#if !suppliers}
+	<p>Csak adminisztrátorok számára elérhető.</p>
+{:else if suppliers.length === 0}
+	<p>Nincs megjeleníthető elem.</p>
 {:else}
 	<dl class="card p-1">
 		{#each suppliers as supplier}
