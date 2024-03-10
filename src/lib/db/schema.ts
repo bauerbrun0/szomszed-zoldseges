@@ -5,7 +5,8 @@ export const users = sqliteTable("users", {
 	id: text("id").notNull().primaryKey(),
 	username: text("username").notNull().unique(),
 	hashedPassword: text("hashed_password").notNull(),
-	isAdmin: integer("is_admin", { mode: "boolean" }).notNull().default(false)
+	isAdmin: integer("is_admin", { mode: "boolean" }).notNull().default(false),
+	image: text("image").notNull()
 });
 
 // login for non privileged users will be vulnerable to sql injection
@@ -13,13 +14,15 @@ export const users = sqliteTable("users", {
 export const nonAdminUsers = sqliteTable("non_admin_users", {
 	id: text("id").notNull().primaryKey(),
 	username: text("username").notNull().unique(),
-	hashedPassword: text("hashed_password").notNull()
+	hashedPassword: text("hashed_password").notNull(),
+	image: text("image").notNull()
 });
 
 export const adminUsers = sqliteTable("admin_users", {
 	id: text("id").notNull().primaryKey(),
 	username: text("username").notNull().unique(),
-	hashedPassword: text("hashed_password").notNull()
+	hashedPassword: text("hashed_password").notNull(),
+	image: text("image").notNull()
 });
 
 export const sessions = sqliteTable("sessions", {
@@ -40,6 +43,16 @@ export const suppliers = sqliteTable("suppliers", {
 	secret: integer("secret", { mode: "boolean" }).notNull(),
 });
 
+export const customerNeeds = sqliteTable("customer_needs", {
+	id: integer("id").notNull().primaryKey({ autoIncrement: true }),
+	userId: text("user_id")
+		.notNull()
+		.references(() => users.id),
+	createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
+	content: text("content").notNull(),
+	sessionId: text("session_id") // should not reference sessions.id
+});	
+
 export type NewUser = typeof users.$inferInsert;
 export type User = typeof users.$inferSelect;
 export type NewNonAdminUser = typeof nonAdminUsers.$inferInsert;
@@ -50,3 +63,5 @@ export type NewSessionData = typeof sessions.$inferInsert;
 export type SessionData = typeof sessions.$inferSelect;
 export type NewSupplier = typeof suppliers.$inferInsert;
 export type Supplier = typeof suppliers.$inferSelect;
+export type NewCustomerNeed = typeof customerNeeds.$inferInsert;
+export type CustomerNeed = typeof customerNeeds.$inferSelect;

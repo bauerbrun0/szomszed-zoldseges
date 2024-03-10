@@ -13,3 +13,10 @@ export type Supplier = {
 	phone: string,
 	address: string,
 }
+
+export type CustomerNeedMessage = {
+	username: string,
+	userImage: string,
+	content: string,
+	createdAt: Date,
+}

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Logo from "$lib/components/Logo.svelte";
-	import Avatar from "$lib/components/icons/Avatar.svelte";
+	import { Avatar } from "@skeletonlabs/skeleton";
   	import { popup, type PopupSettings} from "@skeletonlabs/skeleton";
 	import ProfilePopup from "./ProfilePopup.svelte";
 	import { page } from "$app/stores";
@@ -12,6 +12,7 @@
 	};
 
 	let username = $page.data.user?.username;
+	let userImage = $page.data.user?.image;
 </script>
 
 <header class="bg-surface-100">
@@ -36,7 +37,7 @@
 					use:popup={popupProfile}
 				>
 					{username}
-					<Avatar className="w-8 h-8 md:w-9 md:h-9 ml-2"/>
+					<Avatar src={userImage} width="w-10" class="ml-2" />
 				</button>
 			{/if}
 		</div>

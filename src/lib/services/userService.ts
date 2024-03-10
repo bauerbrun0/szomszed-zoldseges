@@ -26,7 +26,8 @@ async function signinAdmin(username: string, password: string): Promise<Omit<Use
 	return {
 		id: user.id,
 		username: user.username,
-		isAdmin: true
+		isAdmin: true,
+		image: user.image
 	};
 }
 
@@ -55,7 +56,8 @@ async function signinNonAdmin(username: string, password: string): Promise<Omit<
 	return {
 		id: user.id,
 		username: user.username,
-		isAdmin: false
+		isAdmin: false,
+		image: user.image
 	};
 }
 
