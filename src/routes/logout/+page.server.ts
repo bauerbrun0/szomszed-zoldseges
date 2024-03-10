@@ -8,7 +8,6 @@ export const actions: Actions = {
 			return fail(401);
 		}
 	
-		await lucia.invalidateSession(locals.session.id);
 		const sessionCookie = lucia.createBlankSessionCookie();
 		cookies.set(sessionCookie.name, sessionCookie.value, {
 			path: ".",
