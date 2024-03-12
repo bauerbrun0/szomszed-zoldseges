@@ -1,3 +1,4 @@
+import { randomUUID } from "crypto";
 import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
 
 // for lucia we have to use the same table for both admin and non-admin users
@@ -53,6 +54,12 @@ export const customerNeeds = sqliteTable("customer_needs", {
 	sessionId: text("session_id") // should not reference sessions.id
 });	
 
+export const news = sqliteTable("news", {
+	id: text("id", { length: 36 }).primaryKey().$defaultFn(() => randomUUID()),
+	createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
+	content: text("content").notNull(),
+});
+
 export type NewUser = typeof users.$inferInsert;
 export type User = typeof users.$inferSelect;
 export type NewNonAdminUser = typeof nonAdminUsers.$inferInsert;
@@ -65,3 +72,5 @@ export type NewSupplier = typeof suppliers.$inferInsert;
 export type Supplier = typeof suppliers.$inferSelect;
 export type NewCustomerNeed = typeof customerNeeds.$inferInsert;
 export type CustomerNeed = typeof customerNeeds.$inferSelect;
+export type NewNews = typeof news.$inferInsert;
+export type News = typeof news.$inferSelect;
