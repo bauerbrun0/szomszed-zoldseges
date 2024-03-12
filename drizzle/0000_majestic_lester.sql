@@ -14,6 +14,12 @@ CREATE TABLE `customer_needs` (
 	FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
+CREATE TABLE `news` (
+	`id` text(36) PRIMARY KEY NOT NULL,
+	`created_at` integer NOT NULL,
+	`content` text NOT NULL
+);
+--> statement-breakpoint
 CREATE TABLE `non_admin_users` (
 	`id` text PRIMARY KEY NOT NULL,
 	`username` text NOT NULL,

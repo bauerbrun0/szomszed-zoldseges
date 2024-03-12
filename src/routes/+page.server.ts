@@ -1,10 +1,10 @@
 import customerNeedMessageService from "$lib/services/customerNeedMessageService";
+import newsService from "$lib/services/newsService";
 import supplierService from "$lib/services/supplierService";
 import type { CustomerNeedMessage, Supplier } from "$lib/types";
 import type { PageServerLoad } from "./$types";
 import type { Actions } from "./$types";
-import { fail, redirect } from "@sveltejs/kit";
-import { lucia } from "$lib/auth";
+import { fail } from "@sveltejs/kit";
 
 export const load: PageServerLoad = async ({ locals }) => {
 	if (!locals.user) {
@@ -39,8 +39,20 @@ export const actions: Actions = {
 		}
 
 		const formData = await request.formData();
+		// todo parsing
 		const content = formData.get("content") as string;
 
 		await customerNeedMessageService.addCustomerNeedMessage(locals.user.id, content, locals.session.id);
-	}
+	},
+	news: async({ locals, request }) => {
+		if (!locals.session || !locals.user) {
+			return fail(401);
+		}
+
+		const formData = await request.formData();
+		// todo parsing
+		const content = formData.get("markdown") as string;
+
+		await newsService.createNews(content);
+	},
 };
