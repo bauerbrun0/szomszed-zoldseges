@@ -16,6 +16,7 @@ CREATE TABLE `customer_needs` (
 --> statement-breakpoint
 CREATE TABLE `news` (
 	`id` text(36) PRIMARY KEY NOT NULL,
+	`name` text NOT NULL,
 	`created_at` integer NOT NULL,
 	`content` text NOT NULL
 );

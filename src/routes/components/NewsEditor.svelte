@@ -5,7 +5,11 @@
   	import { enhance } from "$app/forms";
 	import Spinner from "$lib/components/Spinner.svelte";
 
-	let markdown =
+	const commentRegex = /---.*?---/gs;
+
+	let loading = false;
+	let name = `Hír - ${new Date().toLocaleDateString("hu-HU")}`;
+	let content =
 	`# Címsor1
 ## Címsor2
 ### Címsor3
@@ -41,10 +45,7 @@ ___
 
 ![alt kép](https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png)
 `;
-
-	let commentRegex = /---.*?---/gs;
-	$: cleanHtml = browser ? DOMPurify.sanitize(marked(markdown.replace(commentRegex, '')) as string) : "";
-	let loading = false;
+	$: cleanHtml = browser ? DOMPurify.sanitize(marked(content.replace(commentRegex, '')) as string) : "";
 </script>
 
 <form
@@ -55,17 +56,27 @@ ___
 
 		return async({ update }) => {
 			await update();
-			markdown = "";
+			content = "";
+			name = "";
 			loading = false;
 		}
 	}}
 >
 	<div class="card grid grid-rows-2 md:grid-cols-2 md:grid-rows-1 h-[600px] gap-6 p-4">
-		<div id="editor" class="h-full">
+		<div class="h-full flex flex-col space-y-2">
+			<input
+				type="text"
+				name="name"
+				placeholder="Hír elnevezése..."
+				class="input variant-primary font-mono disabled:cursor-progress"
+				spellcheck="false"
+				required
+				disabled={loading}
+				bind:value={name}
+			/>
 			<textarea
-				id="markdown"
-				name="markdown"
-				bind:value={markdown}
+				name="content"
+				bind:value={content}
 				placeholder="Írd ide a hír tartalmát..."
 				class="textarea h-full resize-none font-mono disabled:cursor-progress"
 				spellcheck="false"
@@ -80,7 +91,10 @@ ___
 		</div>
 	</div>
 	<div class="w-full flex items-end place-content-end space-x-4">
-		<button class="btn variant-ghost-primary" type="button" on:click={() => markdown = ""}>
+		<button class="btn variant-ghost-primary" type="button" on:click={() => { 
+			content = ""
+			name = ""
+		}}>
 			Törlés
 		</button>
 		<button

@@ -56,6 +56,7 @@ export const customerNeeds = sqliteTable("customer_needs", {
 
 export const news = sqliteTable("news", {
 	id: text("id", { length: 36 }).primaryKey().$defaultFn(() => randomUUID()),
+	name: text("name").notNull(),
 	createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
 	content: text("content").notNull(),
 });
