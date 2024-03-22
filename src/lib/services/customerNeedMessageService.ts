@@ -2,6 +2,7 @@ import db from "$lib/db";
 import type { CustomerNeedMessage } from "$lib/types";
 import { customerNeeds, users } from "$lib/db/schema";
 import { eq, isNull, ne, or } from "drizzle-orm";
+import logger from "$lib/utils/logger";
 
 async function getFilteredCustomerNeedMessages(userId: string, session_id: string): Promise<CustomerNeedMessage[]> {
 	try {
@@ -61,6 +62,7 @@ async function addCustomerNeedMessage(userId: string, content: string, sessionId
 	} catch (e: unknown) {
 		console.error(e);
 	}
+	logger.info(`New message`, { content, userId, sessionId });
 }
 
 const customerNeedMessageService = {
