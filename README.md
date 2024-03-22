@@ -1,7 +1,29 @@
-![Logo](docs/images/logo.png)
-> A vulnerable webapp for demonstration purposes, built with Svelte. 
+<h1 align="center">
+  <br>
+  <img src="docs/images/logo.svg" alt="A Szomszéd Zöldséges logó" width="150">
+  <br>
+  A Szomszéd Zöldséges
+  <br>
+</h1>
 
-![Github Created At](https://img.shields.io/github/created-at/bauerbrun0/szomszed-zoldseges) ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/bauerbrun0/szomszed-zoldseges) ![GitHub top language](https://img.shields.io/github/languages/top/bauerbrun0/szomszed-zoldseges)
+<hr>
+<h4 align="center">A vulnerable webapp for demonstration purposes, built with <a href="https://svelte.dev/" target="_blank">Svelte</a>.</h4>
+
+<p align="center">
+    <img
+		src="https://img.shields.io/github/created-at/bauerbrun0/szomszed-zoldseges"
+    >
+	<img
+		src="https://img.shields.io/github/commit-activity/y/bauerbrun0/szomszed-zoldseges"
+    >
+	<img
+		src="https://img.shields.io/github/languages/top/bauerbrun0/szomszed-zoldseges"
+    >
+	<img
+		src="https://img.shields.io/github/v/release/bauerbrun0/szomszed-zoldseges"
+	>
+
+</p>
 
 ![Home page screenshot](docs/images/home-page.png)
 ## Pre-requisites
@@ -16,6 +38,10 @@ cp .env.example .env.production
 ## Development
 
 ```bash
+pnpm run data:mkdir
+pnpm run db:push
+pnpm run check
+pnpm run db:init-data
 pnpm run dev
 ```
 
