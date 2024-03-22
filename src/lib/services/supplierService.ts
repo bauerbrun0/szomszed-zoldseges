@@ -6,11 +6,17 @@ import logger from "$lib/utils/logger";
 
 async function getSuppliers(): Promise<Supplier[]> {
 	try {
-		const results = await db.select().from(suppliers).where(eq(suppliers.secret, false));
-		const result: Supplier[] = results.map(s => ({
-			name: s.name, person: s.person, email: s.email, address: s.address, phone: s.phone
-		}));
-
+		const result: Supplier[] = await db
+			.select({
+				name: suppliers.name,
+				person: suppliers.person,
+				email: suppliers.email,
+				address: suppliers.address,
+				phone: suppliers.phone
+			})
+			.from(suppliers)
+			.where(eq(suppliers.secret, false));
+		
 		return result;
 	} catch (e: unknown) {
 		logger.error("Service error", { service: "supplierService", function: "getSuppliers", error: e });
@@ -20,10 +26,16 @@ async function getSuppliers(): Promise<Supplier[]> {
 
 async function getSecretSuppliers(): Promise<Supplier[]> {
 	try {
-		const results = await db.select().from(suppliers).where(eq(suppliers.secret, true));
-		const result: Supplier[] = results.map(s => ({
-			name: s.name, person: s.person, email: s.email, address: s.address, phone: s.phone
-		}));
+		const result: Supplier[] = await db
+			.select({
+				name: suppliers.name,
+				person: suppliers.person,
+				email: suppliers.email,
+				address: suppliers.address,
+				phone: suppliers.phone
+			})
+			.from(suppliers)
+			.where(eq(suppliers.secret, true));
 
 		return result;
 	} catch (e: unknown) {
