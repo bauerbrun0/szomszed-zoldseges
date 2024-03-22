@@ -1,5 +1,5 @@
 <script lang="ts">
-	import "../app.pcss";
+	import "../app.css";
 	import { AppShell } from "@skeletonlabs/skeleton";
 	import { computePosition, autoUpdate, offset, shift, flip, arrow } from "@floating-ui/dom";
 	import { storePopup } from "@skeletonlabs/skeleton";
@@ -12,6 +12,7 @@
 
 <svelte:head>
 	<title>A Szomszéd Zöldséges</title>
+	<link rel="icon" type="image/svg" href="/favicon.svg" />
 </svelte:head>
 
 <AppShell>
