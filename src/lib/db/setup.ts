@@ -9,36 +9,36 @@ import { mdToPdf } from "md-to-pdf";
 // user inserts
 console.log("Inserting users...");
 
-const marikasHashedassword = encodeHex(await sha256(new TextEncoder().encode("Password123")));
-const jozsiHashedPassword = await new Argon2id().hash("Password123");
+const nonAdminPasswordHash = encodeHex(await sha256(new TextEncoder().encode(config.NON_ADMIN_PASSWORD)));
+const adminPasswordHash = await new Argon2id().hash(config.ADMIN_PASSWORD);
 
 await db.insert(users).values({
 	id: "1",
-	username: "queen_marika12",
-	hashedPassword: marikasHashedassword,
+	username: config.NON_ADMIN_USERNAME,
+	hashedPassword: nonAdminPasswordHash,
 	isAdmin: false,
 	image: "https://i.pravatar.cc/150?img=47"
 });
 
 await db.insert(users).values({
 	id: "2",
-	username: "jozsef23",
-	hashedPassword: jozsiHashedPassword,
+	username: config.ADMIN_USERNAME,
+	hashedPassword: adminPasswordHash,
 	isAdmin: true,
 	image: "https://i.pravatar.cc/150?img=3"
 });
 
 await db.insert(nonAdminUsers).values({
 	id: "1",
-	username: "queen_marika12",
-	hashedPassword: marikasHashedassword,
+	username: config.NON_ADMIN_USERNAME,
+	hashedPassword: nonAdminPasswordHash,
 	image: "https://i.pravatar.cc/150?img=47"
 });
 
 await db.insert(adminUsers).values({
 	id: "2",
-	username: "jozsef23",
-	hashedPassword: jozsiHashedPassword,
+	username: config.ADMIN_USERNAME,
+	hashedPassword: adminPasswordHash,
 	image: "https://i.pravatar.cc/150?img=3"
 });
 
@@ -67,7 +67,7 @@ await db.insert(suppliers).values({
 
 await db.insert(suppliers).values({
     id: "3",
-    name: "Zöldkert Szállítók flag{sql_injection_is_bad}",
+    name: `Zöldkert Szállítók ${config.SQLI_FLAG}`,
     person: "Mihály Juhász",
     email: "mihaly.juhasz@example.com",
     address: "789 Érseki út",
@@ -108,7 +108,7 @@ await db.insert(suppliers).values({
 await db.insert(suppliers).values({
     id: "7",
     name: "Üvegház Termesztők Zrt.",
-    person: "Olivér Zöld flag{xss_xss_xss}",
+    person: `Olivér Zöld ${config.XSS_FLAG}`,
     email: "oliver.zold@example.com",
     address: "999 Bizalmas körút",
     phone: "999-999-9999",
