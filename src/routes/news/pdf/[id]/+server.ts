@@ -5,7 +5,7 @@ import { error } from '@sveltejs/kit';
 
 export async function GET({ params: { id }, locals }) {
 	if (!locals.user) {
-		throw error(403);
+		throw error(403, { message: "Nincs jogosultsága a kért tartalom megtekintéséhez.", code: 403 });
 	}
 
 	const filePath = path.resolve(config.NEWS_PDF_DIR, `${id}.pdf`);
@@ -14,6 +14,6 @@ export async function GET({ params: { id }, locals }) {
 		const pdf = await fs.readFile(filePath);
 		return new Response(pdf);
 	} catch (e) {
-		throw error(404);
+		throw error(404, { message: "A kért PDF nem található.", code: 404 });
 	}
 }
