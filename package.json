@@ -4,13 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "pnpm run build:pdf-css && vite dev",
-	"build:pdf-css": "pnpm dlx tailwindcss -i ./src/pdf.css -o ./static/pdf.css",
+    "build:pdf-css": "pnpm dlx tailwindcss -i ./src/pdf.css -o ./static/pdf.css",
     "build": "pnpm run build:pdf-css && vite build",
     "preview": "vite preview",
-	"start": "node --env-file=.env.production ./build/index.js",
+    "start": "node --env-file=.env.production ./build/index.js",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-	"data:mkdir": "mkdir -p data/db && mkdir -p data/pdfs/news",
+    "data:mkdir": "mkdir -p data/db && mkdir -p data/pdfs/news",
     "db:migrate": "drizzle-kit generate:sqlite",
     "db:push": "drizzle-kit push:sqlite",
     "db:init-data": "pnpm tsx src/lib/db/setup.ts",
@@ -50,6 +50,7 @@
     "marked": "^12.0.1",
     "md-to-pdf": "4.1.0",
     "oslo": "^1.1.3",
-    "tsx": "^4.7.1"
+    "tsx": "^4.7.1",
+    "winston": "^3.12.0"
   }
 }
