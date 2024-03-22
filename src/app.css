@@ -1,0 +1,60 @@
+/* Write your global styles here, in PostCSS syntax */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body { @apply h-full overflow-hidden; }
+
+@layer base {
+	#preview > h1, #preview > h2, #preview > h3, #preview > h4, #preview > h5, #preview > h6 {
+		@apply my-2;
+	}
+
+	#preview > p, #preview > ul, #preview > ol, #preview > table, #preview > blockquote, #preview image {
+		@apply my-2;
+	}
+
+	#preview > h1 {
+		@apply h1;
+	}
+
+	#preview > h2 {
+		@apply h2;
+	}
+
+	#preview > h3 {
+		@apply h3;
+	}
+
+	#preview > h4 {
+		@apply h4;
+	}
+
+	#preview > h5 {
+		@apply h5;
+	}
+
+	#preview > h6 {
+		@apply h6;
+	}
+
+	#preview > a {
+		@apply anchor underline;
+	}
+
+	#preview > blockquote {
+		@apply blockquote;
+	}
+
+	#preview > ul {
+		@apply list-disc pl-6;
+	}
+
+	#preview > ol {
+		@apply list-decimal pl-6;
+	}
+
+	#preview > table {
+		@apply table;
+	}
+}

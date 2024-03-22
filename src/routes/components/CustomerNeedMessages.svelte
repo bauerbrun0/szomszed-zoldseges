@@ -56,7 +56,7 @@
 	}}
 >
 	<textarea
-		class="bg-transparent border-0 ring-0"
+		class="bg-transparent border-0 ring-0 resize-none"
 		name="content"
 		id="content"
 		placeholder="Írd ide a vásárlói igényeket, véleményeket..."
