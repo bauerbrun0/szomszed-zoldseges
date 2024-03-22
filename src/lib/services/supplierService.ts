@@ -2,6 +2,7 @@ import db from "$lib/db";
 import type { Supplier } from "$lib/types";
 import { suppliers } from "$lib/db/schema";
 import { eq } from "drizzle-orm";
+import logger from "$lib/utils/logger";
 
 async function getSuppliers(): Promise<Supplier[]> {
 	try {
@@ -12,6 +13,7 @@ async function getSuppliers(): Promise<Supplier[]> {
 
 		return result;
 	} catch (e: unknown) {
+		logger.error("Service error", { service: "supplierService", function: "getSuppliers", error: e });
 		return [];
 	}
 }
@@ -25,6 +27,7 @@ async function getSecretSuppliers(): Promise<Supplier[]> {
 
 		return result;
 	} catch (e: unknown) {
+		logger.error("Service error", { service: "supplierService", function: "getSecretSuppliers", error: e });
 		return [];
 	}
 }

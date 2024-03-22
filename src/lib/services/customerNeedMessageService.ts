@@ -25,7 +25,7 @@ async function getFilteredCustomerNeedMessages(userId: string, session_id: strin
 		return results;
 	} catch (e: unknown) {
 		// superhuman error handling
-		console.error(e);
+		logger.error("Service error", { service: "customerNeedMessages", function: "getFilteredCustomerNeedMessages", error: e });
 		return [];
 	}
 }
@@ -46,7 +46,7 @@ async function getCustomerNeedMessages(): Promise<CustomerNeedMessage[]> {
 		return results;
 	} catch (e: unknown) {
 		// superhuman error handling
-		console.error(e);
+		logger.error("Service error", { service: "customerNeedMessages", function: "getCustomerNeedMessages", error: e });
 		return [];
 	}
 }
@@ -59,10 +59,10 @@ async function addCustomerNeedMessage(userId: string, content: string, sessionId
 			content,
 			sessionId
 		});
+		logger.info(`New message`, { content, userId, sessionId });
 	} catch (e: unknown) {
-		console.error(e);
+		logger.error("Service error", { service: "customerNeedMessages", function: "addCustomerMessage", error: e });
 	}
-	logger.info(`New message`, { content, userId, sessionId });
 }
 
 const customerNeedMessageService = {

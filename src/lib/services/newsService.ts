@@ -33,6 +33,7 @@ async function createNews(name: string, content: string): Promise<void> {
 	} catch (error) {
 		// can't get to work tx.rollback(), so there's go transaction
 		await db.delete(news).where(eq(news.id, res.id));
+		logger.error("Service error", { service: "newsService", function: "createNews", error });
 		throw error;
 	}
 }
@@ -41,6 +42,7 @@ async function getNews(): Promise<News[]> {
 	try {
 		return await db.select().from(news);
 	} catch (error) {
+		logger.error("Service error", { service: "newsService", function: "getNews", error });
 		return [];
 	}
 }
@@ -50,6 +52,7 @@ async function getNewsById(id: string): Promise<News | null> {
 		const [res] = await db.select().from(news).where(eq(news.id, id));
 		return res;
 	} catch (error) {
+		logger.error("Service error", { service: "newsService", function: "getNewsById", error });
 		return null;
 	}
 }

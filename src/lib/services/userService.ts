@@ -1,4 +1,5 @@
-import { type User, adminUsers, nonAdminUsers } from "$lib/db/schema";
+import { adminUsers } from "$lib/db/schema";
+import type { User } from "$lib/db/schema";
 import db, { sqlite } from "$lib/db";
 import { Argon2id } from "oslo/password";
 import { sha256 } from "oslo/crypto";
