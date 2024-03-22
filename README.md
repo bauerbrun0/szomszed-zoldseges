@@ -6,7 +6,6 @@
   <br>
 </h1>
 
-<hr>
 <h4 align="center">A vulnerable webapp for demonstration purposes, built with <a href="https://svelte.dev/" target="_blank">Svelte</a>.</h4>
 
 <p align="center">
