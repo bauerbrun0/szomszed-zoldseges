@@ -4816,6 +4816,19 @@ a.\!chip:hover,
   margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
+.list-dl div {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: var(--theme-rounded-base);
+}
+
+.list-dl div > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1rem * var(--tw-space-x-reverse));
+  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
 .list-nav a,
 	.list-nav button,
 	.list-option {
@@ -5573,6 +5586,10 @@ a.\!chip:hover,
   margin-left: auto;
 }
 
+.mr-1 {
+  margin-right: 0.25rem;
+}
+
 .mr-2 {
   margin-right: 0.5rem;
 }
@@ -5657,6 +5674,10 @@ a.\!chip:hover,
   height: 5rem;
 }
 
+.h-4 {
+  height: 1rem;
+}
+
 .h-5 {
   height: 1.25rem;
 }
@@ -5696,6 +5717,10 @@ a.\!chip:hover,
 
 .max-h-\[200px\] {
   max-height: 200px;
+}
+
+.max-h-\[300px\] {
+  max-height: 300px;
 }
 
 .max-h-\[calc\(100dvh-57px\)\] {
@@ -5740,6 +5765,10 @@ a.\!chip:hover,
 
 .w-36 {
   width: 9rem;
+}
+
+.w-4 {
+  width: 1rem;
 }
 
 .w-5 {
@@ -8596,6 +8625,10 @@ body {
 .hover\:text-primary-800:hover {
   --tw-text-opacity: 1;
   color: rgb(var(--color-primary-800) / var(--tw-text-opacity));
+}
+
+.hover\:underline:hover {
+  text-decoration-line: underline;
 }
 
 .hover\:opacity-100:hover {
