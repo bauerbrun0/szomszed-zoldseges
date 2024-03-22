@@ -1,5 +1,6 @@
 import { lucia } from "$lib/auth";
-import type { Handle } from "@sveltejs/kit";
+import logger from "$lib/utils/logger";
+import type { Handle, HandleServerError } from "@sveltejs/kit";
 
 export const handle: Handle = async ({ event, resolve }) => {
 	const sessionId = event.cookies.get(lucia.sessionCookieName);
@@ -31,4 +32,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 	event.locals.user = user;
 	event.locals.session = session;
 	return resolve(event);
+};
+
+export const handleError: HandleServerError = async ({ error }) => {
+	logger.error("Unexpected error", { error });
 };
