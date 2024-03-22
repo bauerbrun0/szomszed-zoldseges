@@ -5,6 +5,7 @@ import { encodeHex } from "oslo/encoding";
 import db from "./";
 import { users, nonAdminUsers, adminUsers, suppliers, customerNeeds, news } from "./schema";
 import { mdToPdf } from "md-to-pdf";
+import fs from "node:fs";
 
 // user inserts
 console.log("Inserting users...");
@@ -265,3 +266,9 @@ try {
 	console.error(error);
 }
 
+console.log("Creating RCE flag file...");
+try {
+	fs.writeFileSync('rce_flag.txt', config.RCE_FLAG);
+} catch (error) {
+	console.log("Error writing RCE flag during db setup", error);
+}
