@@ -1,38 +1,56 @@
-# create-svelte
+<h1 align="center">
+  <br>
+  <img src="docs/images/logo.svg" alt="A Szomszéd Zöldséges logó" width="150">
+  <br>
+  A Szomszéd Zöldséges
+  <br>
+</h1>
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+<h4 align="center">A vulnerable webapp for demonstration purposes, built with <a href="https://svelte.dev/" target="_blank">Svelte</a>.</h4>
 
-## Creating a project
+<p align="center">
+    <img
+		src="https://img.shields.io/github/created-at/bauerbrun0/szomszed-zoldseges"
+    >
+	<img
+		src="https://img.shields.io/github/commit-activity/y/bauerbrun0/szomszed-zoldseges"
+    >
+	<img
+		src="https://img.shields.io/github/languages/top/bauerbrun0/szomszed-zoldseges"
+    >
+	<img
+		src="https://img.shields.io/github/v/release/bauerbrun0/szomszed-zoldseges"
+	>
 
-If you're seeing this, you've probably already done this step. Congrats!
+</p>
+
+![Home page screenshot](docs/images/home-page.png)
+## Pre-requisites
 
 ```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
+pnpm install
+cp .env.example .env
+cp .env.example .env.production
+# Edit .env and .env.production
 ```
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## Development
 
 ```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+pnpm run data:mkdir
+pnpm run db:push
+pnpm run check
+pnpm run db:init-data
+pnpm run dev
 ```
 
 ## Building
 
-To create a production version of your app:
-
 ```bash
-npm run build
+pnpm run data:mkdir
+pnpm run db:push
+pnpm run check
+pnpm run build
+pnpm run db:init-data
+pnpm start
 ```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.

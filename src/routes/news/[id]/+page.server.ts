@@ -7,7 +7,7 @@ export const load: PageServerLoad = async ({ params: { id } }) => {
 	const news: News | null = await newsService.getNewsById(id);
 
 	if (!news) {
-		throw error(404, "News not found");
+		throw error(404, { message: "Nem található a hír." , code: 404 });
 	}
 
 	return {

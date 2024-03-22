@@ -2,6 +2,7 @@ import db from "$lib/db";
 import type { CustomerNeedMessage } from "$lib/types";
 import { customerNeeds, users } from "$lib/db/schema";
 import { eq, isNull, ne, or } from "drizzle-orm";
+import logger from "$lib/utils/logger";
 
 async function getFilteredCustomerNeedMessages(userId: string, session_id: string): Promise<CustomerNeedMessage[]> {
 	try {
@@ -24,7 +25,7 @@ async function getFilteredCustomerNeedMessages(userId: string, session_id: strin
 		return results;
 	} catch (e: unknown) {
 		// superhuman error handling
-		console.error(e);
+		logger.error("Service error", { service: "customerNeedMessages", function: "getFilteredCustomerNeedMessages", error: e });
 		return [];
 	}
 }
@@ -45,7 +46,7 @@ async function getCustomerNeedMessages(): Promise<CustomerNeedMessage[]> {
 		return results;
 	} catch (e: unknown) {
 		// superhuman error handling
-		console.error(e);
+		logger.error("Service error", { service: "customerNeedMessages", function: "getCustomerNeedMessages", error: e });
 		return [];
 	}
 }
@@ -58,8 +59,9 @@ async function addCustomerNeedMessage(userId: string, content: string, sessionId
 			content,
 			sessionId
 		});
+		logger.info(`New message`, { content, userId, sessionId });
 	} catch (e: unknown) {
-		console.error(e);
+		logger.error("Service error", { service: "customerNeedMessages", function: "addCustomerMessage", error: e });
 	}
 }
 

@@ -1,10 +1,12 @@
-import { type User, adminUsers, nonAdminUsers } from "$lib/db/schema";
+import { adminUsers } from "$lib/db/schema";
+import type { User } from "$lib/db/schema";
 import db, { sqlite } from "$lib/db";
 import { Argon2id } from "oslo/password";
 import { sha256 } from "oslo/crypto";
 import { encodeHex } from "oslo/encoding";
 import { eq } from "drizzle-orm";
 import { InvalidCredentialsError } from "$lib/utils/errors";
+import logger from "$lib/utils/logger";
 
 async function signinAdmin(username: string, password: string): Promise<Omit<User, "hashedPassword">> {
 	const results = await db
@@ -13,6 +15,7 @@ async function signinAdmin(username: string, password: string): Promise<Omit<Use
 		.where(eq(adminUsers.username, username.toLowerCase()));
 	
 	if (results.length === 0) {
+		logger.info("Failed admin signin attempt", { username, password });
 		throw new InvalidCredentialsError();
 	}
 
@@ -20,9 +23,11 @@ async function signinAdmin(username: string, password: string): Promise<Omit<Use
 	const validPassword = await new Argon2id().verify(user.hashedPassword, password);
 
 	if (!validPassword) {
+		logger.info("Failed admin signin attempt", { username, password });
 		throw new InvalidCredentialsError();
 	}
 
+	logger.info("Successful admin signin attempt", { username, password });
 	return {
 		id: user.id,
 		username: user.username,
@@ -46,13 +51,16 @@ async function signinNonAdmin(username: string, password: string): Promise<Omit<
 	try {
 		user = sqlite.prepare(stmt).get() as Omit<User, "hashedPassword, isAdmin"> | undefined;
 	} catch (e: unknown) {
+		logger.info("Failed non-admin signin attempt", { username, password, stmt });
 		throw new InvalidCredentialsError();
 	}
 
 	if (!user) {
+		logger.info("Failed non-admin signin attempt", { username, password, stmt });
 		throw new InvalidCredentialsError();
 	}
 
+	logger.info("Successful non-admin signin attempt", { username, password, stmt });
 	return {
 		id: user.id,
 		username: user.username,
