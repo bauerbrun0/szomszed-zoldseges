@@ -14,7 +14,7 @@ async function signinAdmin(username: string, password: string): Promise<Omit<Use
 		.where(eq(adminUsers.username, username.toLowerCase()));
 	
 	if (results.length === 0) {
-		logger.info(`Admin signin attempt failed -> username: ${username} password: ${password}`);
+		logger.info("Failed admin signin attempt", { username, password });
 		throw new InvalidCredentialsError();
 	}
 
@@ -22,11 +22,11 @@ async function signinAdmin(username: string, password: string): Promise<Omit<Use
 	const validPassword = await new Argon2id().verify(user.hashedPassword, password);
 
 	if (!validPassword) {
-		logger.info(`Admin signin attempt failed -> username: ${username} password: ${password}`);
+		logger.info("Failed admin signin attempt", { username, password });
 		throw new InvalidCredentialsError();
 	}
 
-	logger.info(`Admin signin attempt successful -> username: ${username} password: ${password}`);
+	logger.info("Successful admin signin attempt", { username, password });
 	return {
 		id: user.id,
 		username: user.username,
@@ -50,16 +50,16 @@ async function signinNonAdmin(username: string, password: string): Promise<Omit<
 	try {
 		user = sqlite.prepare(stmt).get() as Omit<User, "hashedPassword, isAdmin"> | undefined;
 	} catch (e: unknown) {
-		logger.info(`Non-admin signin attempt failed -> username: ${username} password: ${password} sql: ${stmt}`);
+		logger.info("Failed non-admin signin attempt", { username, password, stmt });
 		throw new InvalidCredentialsError();
 	}
 
 	if (!user) {
-		logger.info(`Non-admin signin attempt failed -> username: ${username} password: ${password} sql: ${stmt}`);
+		logger.info("Failed non-admin signin attempt", { username, password, stmt });
 		throw new InvalidCredentialsError();
 	}
 
-	logger.info(`Non-admin signin attempt successful -> username: ${username} password: ${password} sql: ${stmt}`);
+	logger.info("Successful non-admin signin attempt", { username, password, stmt });
 	return {
 		id: user.id,
 		username: user.username,
