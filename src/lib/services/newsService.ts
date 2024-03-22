@@ -1,3 +1,4 @@
+import config from "$lib/configs/app.config";
 import db from "$lib/db";
 import { news, type News } from "$lib/db/schema";
 import { eq } from "drizzle-orm";
@@ -22,17 +23,8 @@ async function createNews(name: string, content: string): Promise<void> {
 
 	try {
 		await mdToPdf({ content: markdownForPdf }, {
-			dest: `./pdfs/news/${res.id}.pdf`,
-			stylesheet: ["static/pdf.css"],
-			pdf_options: {
-				format: "A4",
-				margin: {
-					top: "0mm",
-					right: "0mm",
-					bottom: "0mm",
-					left: "0mm"
-				}
-			}
+			dest: `${config.NEWS_PDF_DIR}/${res.id}.pdf`,
+			...config.MD_TO_PDF_OPTIONS
 		});
 	} catch (error) {
 		// can't get to work tx.rollback(), so there's go transaction

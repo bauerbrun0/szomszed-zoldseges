@@ -12,6 +12,7 @@
 
 <svelte:head>
 	<title>A Szomszéd Zöldséges</title>
+	<link rel="icon" type="image/svg" href="/favicon.svg" />
 </svelte:head>
 
 <AppShell>

@@ -17,6 +17,9 @@ dependencies:
   dompurify:
     specifier: ^3.0.9
     version: 3.0.9
+  dotenv:
+    specifier: ^16.4.5
+    version: 16.4.5
   drizzle-orm:
     specifier: ^0.29.5
     version: 0.29.5(@types/better-sqlite3@7.6.9)(better-sqlite3@9.4.3)
@@ -67,9 +70,6 @@ devDependencies:
   '@types/node':
     specifier: ^20.11.24
     version: 20.11.24
-  '@types/simplemde':
-    specifier: ^1.11.11
-    version: 1.11.11
   autoprefixer:
     specifier: ^10.4.16
     version: 10.4.18(postcss@8.4.35)
@@ -1616,10 +1616,6 @@ packages:
     resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}
     dev: true
 
-  /@types/simplemde@1.11.11:
-    resolution: {integrity: sha512-H3ml0YJtx9XMs2pGHwQy/UHzkg9W3Ke3QikQ/jHhEZj1dfmPbWqIvaNyNrt3dtiVlztWhMgK02+Rmoem+Jot/Q==}
-    dev: true
-
   /@types/trusted-types@2.0.7:
     resolution: {integrity: sha512-ScaPdn1dQczgbl0QFTeTOmVHFULt394XJgOQNoyVhZ6r2vLnMLJfBPd53SB52T/3G36VI1/g2MZaX0cwDuXsfw==}
     dev: true
@@ -2237,6 +2233,11 @@ packages:
 
   /dompurify@3.0.9:
     resolution: {integrity: sha512-uyb4NDIvQ3hRn6NiC+SIFaP4mJ/MdXlvtunaqK9Bn6dD3RuB/1S/gasEjDHD8eiaqdSael2vBv+hOs7Y+jhYOQ==}
+    dev: false
+
+  /dotenv@16.4.5:
+    resolution: {integrity: sha512-ZmdL2rui+eB2YwhsWzjInR8LldtZHGDoQ1ugH85ppHKwpUHL7j7rN0Ti9NCnGiQbhaZ11FpR+7ao1dNsmduNUg==}
+    engines: {node: '>=12'}
     dev: false
 
   /dreamopt@0.8.0:

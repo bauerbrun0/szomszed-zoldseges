@@ -1,3 +1,4 @@
+import config from "$lib/configs/app.config";
 import path from "node:path";
 import fs from "node:fs/promises";
 import { error } from '@sveltejs/kit';
@@ -7,7 +8,7 @@ export async function GET({ params: { id }, locals }) {
 		throw error(403);
 	}
 
-	const filePath = path.resolve("pdfs/news", `${id}.pdf`);
+	const filePath = path.resolve(config.NEWS_PDF_DIR, `${id}.pdf`);
 	
 	try {
 		const pdf = await fs.readFile(filePath);
