@@ -60,6 +60,9 @@ const MD_TO_PDF_OPTIONS = {
 			bottom: "0mm",
 			left: "0mm"
 		}
+	},
+	launch_options: {
+		args: ["--no-sandbox", "--disable-setuid-sandbox"]
 	}
 } satisfies Partial<HtmlConfig>;
 
